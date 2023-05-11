@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {
   Page,
   PageSection,
@@ -9,15 +9,17 @@ import {
 } from '@patternfly/react-core';
 import './example.css';
 
-export default function ExamplePage() {
+export default function TracingPage() {
   return (
     <>
-      <Helmet>
-        <title data-test="example-page-title">Hello, Plugin!</title>
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title data-test="distributed-tracing-page-title"> Tracing</title>
+        </Helmet>
+      </HelmetProvider>
       <Page>
         <PageSection variant="light">
-          <Title headingLevel="h1">Hello, Plugin!</Title>
+          <Title headingLevel="h1"> Hello, Tracing Plugin! </Title>
         </PageSection>
         <PageSection variant="light">
           <TextContent>
