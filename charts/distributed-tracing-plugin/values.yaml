@@ -1,10 +1,10 @@
 ---
 plugin:
-  name: ""
+  name: "distributed-tracing-plugin"
   description: ""
-  image: ""
-  imagePullPolicy: IfNotPresent
-  replicas: 2
+  image: "quay.io/jezhu/distributed-tracing-plugin:0.0.1"
+  imagePullPolicy: Always
+  replicas: 1
   port: 9443
   securityContext:
     enabled: true
@@ -24,7 +24,7 @@ plugin:
       cpu: 10m
       memory: 50Mi
   basePath: /
-  certificateSecretName: ""
+  certificateSecretName: "plugin-serving-cert"
   serviceAccount:
     create: true
     annotations: {}

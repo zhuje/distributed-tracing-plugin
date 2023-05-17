@@ -3,7 +3,7 @@
     "type": "console.page/route",
     "properties": {
       "exact": true,
-      "path": "/monitoring/traces",
+      "path": "/observe/traces",
       "component": { "$codeRef": "TracingPage" }
     }
   },
@@ -12,7 +12,7 @@
     "properties": {
       "id": "distributed-tracing",
       "name": "Traces",
-      "href": "/monitoring/traces",
+      "href": "/observe/traces",
       "perspective": "admin",
       "section": "observe"
     }
