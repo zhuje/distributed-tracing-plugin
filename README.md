@@ -1,9 +1,6 @@
 # Tracing Console Plugin 
 
-This project is a minimal template for writing a new OpenShift Console dynamic
-plugin.
-
-This is a OpenShift Console dynamic plugin that adds UI for tracing. This can be found in the OpenShift UI in the navigation bar under `Observe > Traces`.
+This is an OpenShift Console dynamic plugin that adds UI for tracing. This can be found in the OpenShift UI in the navigation bar under `Observe > Traces`.
 
 ## Development
 
