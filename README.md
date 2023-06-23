@@ -5,54 +5,6 @@ plugin.
 
 This is a OpenShift Console dynamic plugin that adds UI for tracing. This can be found in the OpenShift UI in the navigation bar under `Observe > Traces`.
 
-## More about Dynamic Plugins on OpenShift 
-[Dynamic plugins](https://github.com/openshift/console/tree/master/frontend/packages/console-dynamic-plugin-sdk)
-allow you to extend the
-[OpenShift UI](https://github.com/openshift/console)
-at runtime, adding custom pages and other extensions. They are based on
-[webpack module federation](https://webpack.js.org/concepts/module-federation/).
-Plugins are registered with console using the `ConsolePlugin` custom resource
-and enabled in the console operator config by a cluster administrator.
-
-Using the latest `v1` API version of `ConsolePlugin` CRD, requires OpenShift 4.12
-and higher. For using old `v1alpha1` API version us OpenShift version 4.10 or 4.11.
-
-For an example of a plugin that works with OpenShift 4.11, see the `release-4.11` branch.
-For a plugin that works with OpenShift 4.10, see the `release-4.10` branch.
-
-[Node.js](https://nodejs.org/en/) and [yarn](https://yarnpkg.com) are required
-to build and run the example. To run OpenShift console in a container, either
-[Docker](https://www.docker.com) or [podman 3.2.0+](https://podman.io) and
-[oc](https://console.redhat.com/openshift/downloads) are required.
-
-## Getting started
-
-After cloning this repo, you should update the plugin metadata such as the
-plugin name in the `consolePlugin` declaration of [package.json](package.json).
-
-```json
-"consolePlugin": {
-  "name": "my-plugin",
-  "version": "0.0.1",
-  "displayName": "My Plugin",
-  "description": "Enjoy this shiny, new console plugin!",
-  "exposedModules": {
-    "ExamplePage": "./components/ExamplePage"
-  },
-  "dependencies": {
-    "@console/pluginAPI": "*"
-  }
-}
-```
-
-The template adds a single example page in the Home navigation section. The
-extension is declared in the [console-extensions.json](console-extensions.json)
-file and the React component is declared in
-[src/components/ExamplePage.tsx](src/components/ExamplePage.tsx).
-
-You can run the plugin using a local development environment or build an image
-to deploy it to a cluster.
-
 ## Development
 
 ### Option 1: Local
@@ -181,6 +133,81 @@ Steps to generate reports
 1. In command prompt, navigate to root folder and execute the command `yarn run cypress-merge`
 2. Then execute command `yarn run cypress-generate`
 The cypress-report.html file is generated and should be in (/integration-tests/screenshots) directory
+
+## More about Dynamic Plugins on OpenShift 
+
+This plugin was forked from [OpenShift Console Plugin Template](https://github.com/openshift/console-plugin-template).
+
+[Dynamic plugins](https://github.com/openshift/console/tree/master/frontend/packages/console-dynamic-plugin-sdk)
+allow you to extend the
+[OpenShift UI](https://github.com/openshift/console)
+at runtime, adding custom pages and other extensions. They are based on
+[webpack module federation](https://webpack.js.org/concepts/module-federation/).
+Plugins are registered with console using the `ConsolePlugin` custom resource
+and enabled in the console operator config by a cluster administrator.
+
+Using the latest `v1` API version of `ConsolePlugin` CRD, requires OpenShift 4.12
+and higher. For using old `v1alpha1` API version us OpenShift version 4.10 or 4.11.
+
+For an example of a plugin that works with OpenShift 4.11, see the `release-4.11` branch.
+For a plugin that works with OpenShift 4.10, see the `release-4.10` branch.
+
+[Node.js](https://nodejs.org/en/) and [yarn](https://yarnpkg.com) are required
+to build and run the example. To run OpenShift console in a container, either
+[Docker](https://www.docker.com) or [podman 3.2.0+](https://podman.io) and
+[oc](https://console.redhat.com/openshift/downloads) are required.
+
+## How to Add Pages and Tabs to the Console Plugin
+
+The [example](https://github.com/openshift/console-plugin-template) below adds a single example page in the Home navigation section. 
+
+1. Expose modules in [package.json](package.json): 
+
+```json
+"consolePlugin": {
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "displayName": "My Plugin",
+  "description": "Enjoy this shiny, new console plugin!",
+  "exposedModules": {
+    "ExamplePage": "./components/ExamplePage"
+  },
+  "dependencies": {
+    "@console/pluginAPI": "*"
+  }
+}
+```
+
+2. The extension is declared in the [console-extensions.json](https://github.com/openshift/console-plugin-template/blob/main/console-extensions.json)
+file.
+```json
+[
+  {
+    "type": "console.page/route",
+    "properties": {
+      "exact": true,
+      "path": "/example",
+      "component": { "$codeRef": "ExamplePage" }
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "example",
+      "name": "Plugin Example",
+      "href": "/example",
+      "perspective": "admin",
+      "section": "home"
+    }
+  }
+]
+```
+
+4. And the React component is declared in
+[src/components/ExamplePage.tsx](https://github.com/openshift/console-plugin-template/blob/main/src/components/ExamplePage.tsx).
+
+You can run the plugin using a local development environment or build an image
+to deploy it to a cluster.
 
 ## References
 
