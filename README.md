@@ -210,7 +210,7 @@ You can run the plugin using a local development environment or build an image
 to deploy it to a cluster.
 
 ## References
-
+- [Console Plugin Template](https://github.com/openshift/console-plugin-template)
 - [Console Plugin SDK README](https://github.com/openshift/console/tree/master/frontend/packages/console-dynamic-plugin-sdk)
 - [Customization Plugin Example](https://github.com/spadgett/console-customization-plugin)
 - [Dynamic Plugin Enhancement Proposal](https://github.com/openshift/enhancements/blob/master/enhancements/console/dynamic-plugins.md)
