@@ -3,11 +3,52 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {
   Page,
   PageSection,
-  Text,
-  TextContent,
   Title,
 } from '@patternfly/react-core';
 import './example.css';
+
+// TODO: Perses v.44.x release will contain the scatterplot. We 
+// We need to update all the imports to the offical npm package name 
+// @perses-dev. NOT perses-dev (this is just locally linked for now). 
+// Linked via `yarn add `<path-to-local-perses-repo>`.
+
+// PersesPage Wrapper 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+//import { QueryParamProvider } from "use-query-params";
+
+// Plugin Registry 
+// import { PluginRegistry } from 'perses-dev/plugin-system';
+
+
+// // Define which plugins to use 
+import prometheusResource from 'perses-dev/prometheus-plugin/plugin.json';
+import panelsResource from 'perses-dev/panels-plugin/plugin.json';
+import { PluginModuleResource, PluginLoader, dynamicImportPluginLoader } from 'perses-dev/plugin-system';
+import { PluginRegistry } from 'perses-dev/plugin-system';
+
+
+/**
+ * A PluginLoader that includes all the "built-in" plugins that are bundled with Perses by default and additional custom plugins
+ */
+export const bundledPluginLoader: PluginLoader = dynamicImportPluginLoader([
+  {
+    resource: prometheusResource as PluginModuleResource,
+    importPlugin: () => import('perses-dev/prometheus-plugin'),
+  },
+  {
+    resource: panelsResource as PluginModuleResource,
+    importPlugin: () => import('perses-dev/panels-plugin'),
+  },
+]);
+
+
+const queryClient = new QueryClient({
+  defaultOptions: { 
+      queries: { 
+          refetchOnWindowFocus: false 
+      } 
+  }
+});
 
 export default function TracingPage() {
   return (
@@ -22,26 +63,19 @@ export default function TracingPage() {
           <Title headingLevel="h1"> Hello, Tracing Plugin! </Title>
         </PageSection>
         <PageSection variant="light">
-          <TextContent>
-            <Text component="p">
-              <span className="console-plugin-template__nice">Nice!</span> Your
-              plugin is working.
-            </Text>
-            <Text component="p">
-              This is a custom page contributed by the console plugin template.
-              The extension that adds the page is declared in
-              console-extensions.json in the project root along with the
-              corresponding nav item. Update console-extensions.json to change
-              or add extensions. Code references in console-extensions.json must
-              have a corresonding property <code>exposedModules</code> in
-              package.json mapping the reference to the module.
-            </Text>
-            <Text component="p">
-              After cloning this project, replace references to{' '}
-              <code>console-template-plugin</code> and other plugin metadata in
-              package.json with values for your plugin.
-            </Text>
-          </TextContent>
+        <QueryClientProvider client={queryClient}>
+          <PluginRegistry 
+            pluginLoader={bundledPluginLoader}
+            defaultPluginKinds={{
+              Panel: 'TimeSeriesChart',
+              TimeSeriesQuery: 'PrometheusTimeSeriesQuery',
+            }}
+          >
+
+          </PluginRegistry>
+
+
+        </QueryClientProvider>
         </PageSection>
       </Page>
     </>

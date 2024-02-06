@@ -69,5 +69,9 @@
     "dependencies": {
       "@console/pluginAPI": "*"
     }
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.18.1",
+    "perses-dev": "/Users/jezhu/Git/Perses-all/perses/ui"
   }
 }
