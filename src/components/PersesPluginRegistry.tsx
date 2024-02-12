@@ -1,3 +1,4 @@
+// Eagerly load the metadata for the bundled plugins, but lazy-load the plugins
 import prometheusResource from 'perses-dev/prometheus-plugin/plugin.json';
 import panelsResource from 'perses-dev/panels-plugin/plugin.json';
 import { PluginModuleResource, PluginLoader, dynamicImportPluginLoader } from 'perses-dev/plugin-system';

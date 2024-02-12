@@ -42,8 +42,8 @@
     "mochawesome-merge": "^4.3.0",
     "prettier": "^2.7.1",
     "prettier-stylelint": "^0.4.2",
-    "react": "^18.0.0",
-    "react-dom": "^17.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-helmet-async": "^1.0.0",
     "react-i18next": "^11.8.11",
     "react-router": "5.2.0",
@@ -71,7 +71,11 @@
     }
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.18.1",
-    "perses-dev": "/Users/jezhu/Git/Perses-all/perses/ui"
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.7",
+    "@tanstack/react-query": "4.7.1",
+    "perses-dev": "/Users/jezhu/Git/Perses-all/perses/ui",
+    "use-query-params": "^2.2.1"
   }
 }
