@@ -120,11 +120,11 @@ export default function TracingPage() {
   const pluginLoader = dynamicImportPluginLoader([
     {
       resource: prometheusResource as PluginModuleResource,
-      importPlugin: () => import('perses-dev/prometheus-plugin'),
+      importPlugin: () => import('perses-dev/prometheus-plugin/src'),
     },
     {
       resource: panelsResource as PluginModuleResource,
-      importPlugin: () => import('perses-dev/panels-plugin'),
+      importPlugin: () => import('perses-dev/panels-plugin/src'),
     },
   ]);
 
