@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from 'react';
 import { usePlugin, PanelProps } from 'perses-dev/plugin-system';
 import { Skeleton } from '@mui/material';
 import { UnknownSpec } from 'perses-dev/core';

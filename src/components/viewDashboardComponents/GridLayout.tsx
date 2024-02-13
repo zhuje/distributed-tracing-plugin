@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import React from 'react';
 import { ErrorAlert, ErrorBoundary } from 'perses-dev/components';
 import { usePanelGroup, PanelGroupId } from 'perses-dev/dashboards';
 import { GridItemContent } from './GridItemContent';

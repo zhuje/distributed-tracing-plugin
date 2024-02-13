@@ -1,4 +1,3 @@
-import React from 'react';
 import { DateTimeRangePicker, TimeOption } from 'perses-dev/components';
 import { useTimeRange } from 'perses-dev/plugin-system';
 

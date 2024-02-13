@@ -10,7 +10,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import React from 'react';
 import { BoxProps } from '@mui/material';
 import { ErrorBoundary, ErrorAlert } from 'perses-dev/components';
 import { TimeRangeProvider } from 'perses-dev/plugin-system';
@@ -21,7 +20,6 @@ import {
   DatasourceStoreProvider,
 } from 'perses-dev/dashboards';
 import { DashboardApp, DashboardAppProps } from './DashboardApp';
-import { usePluginRegistry } from 'perses-dev/plugin-system';
 
 export interface ViewDashboardProps extends Omit<BoxProps, 'children'>, DashboardAppProps {
   datasourceApi: DatasourceStoreProviderProps['datasourceApi'];
