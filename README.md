@@ -6,6 +6,9 @@ This is an OpenShift Console dynamic plugin that adds UI for tracing. This can b
 
 ### Option 1: Local
 
+Prerequisite 
+You need to have a OpenShift Cluster. 
+
 In one terminal window, run:
 
 1. `yarn install`
@@ -13,7 +16,7 @@ In one terminal window, run:
 
 In another terminal window, run:
 
-1. `oc login` (requires [oc](https://console.redhat.com/openshift/downloads) and an [OpenShift cluster](https://console.redhat.com/openshift/create))
+1. `oc login` Login to your OpenShift Cluster (requires [oc](https://console.redhat.com/openshift/downloads) and an [OpenShift cluster](https://console.redhat.com/openshift/create))
 2. `yarn run start-console` (requires [Docker](https://www.docker.com) or [podman 3.2.0+](https://podman.io))
 
 This will run the OpenShift console in a container connected to the cluster
