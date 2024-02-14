@@ -6,7 +6,7 @@ This is an OpenShift Console dynamic plugin that adds UI for tracing. This can b
 
 ### Option 1: Local
 
-Prerequisite 
+**Prerequisite**  </br>
 You need to have a OpenShift Cluster. 
 
 In one terminal window, run:
