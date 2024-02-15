@@ -838,6 +838,15 @@
     date-fns "^2.28.0"
     immer "^9.0.15"
 
+"@perses-dev/tempo-plugin@0.0.0-snapshot-scatter-chart-embed-8efdfab":
+  version "0.0.0-snapshot-scatter-chart-embed-8efdfab"
+  resolved "https://registry.yarnpkg.com/@perses-dev/tempo-plugin/-/tempo-plugin-0.0.0-snapshot-scatter-chart-embed-8efdfab.tgz#1526ca15de90baf282528966ecb695ce7ee8a0a9"
+  integrity sha512-IoUjsWxHhL5iUxQdkXzwJbpnsQdnKexq93FGklGobDHcvZn6PAQoIpydH4hmiP3ONq4qUzakeqGzNQ5E0BZz9A==
+  dependencies:
+    "@perses-dev/components" "0.0.0-snapshot-scatter-chart-embed-8efdfab"
+    "@perses-dev/core" "0.0.0-snapshot-scatter-chart-embed-8efdfab"
+    "@perses-dev/plugin-system" "0.0.0-snapshot-scatter-chart-embed-8efdfab"
+
 "@popperjs/core@^2.11.8":
   version "2.11.8"
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
