@@ -42,7 +42,7 @@
     "mochawesome-merge": "^4.3.0",
     "prettier": "^2.7.1",
     "prettier-stylelint": "^0.4.2",
-    "react": "^18.0.0",
+    "react": "^17.0.0",
     "react-dom": "^17.0.1",
     "react-helmet-async": "^1.0.0",
     "react-i18next": "^11.8.11",
@@ -69,5 +69,18 @@
     "dependencies": {
       "@console/pluginAPI": "*"
     }
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@hookform/resolvers": "^3.2.0",
+    "@mui/material": "^5.10.14",
+    "@perses-dev/components": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
+    "@perses-dev/dashboards": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
+    "@perses-dev/panels-plugin": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
+    "@perses-dev/plugin-system": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
+    "@perses-dev/prometheus-plugin": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
+    "@tanstack/react-query": "^4.7.1",
+    "undefined": "0.1.0"
   }
 }

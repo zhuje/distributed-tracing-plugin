@@ -8,6 +8,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import './example.css';
+import EmbeddedPanel from './EmbeddedPanel';
 
 export default function TracingPage() {
   return (
@@ -22,6 +23,7 @@ export default function TracingPage() {
           <Title headingLevel="h1"> Hello, Tracing Plugin! </Title>
         </PageSection>
         <PageSection variant="light">
+          <EmbeddedPanel/>
           <TextContent>
             <Text component="p">
               <span className="console-plugin-template__nice">Nice!</span> Your
