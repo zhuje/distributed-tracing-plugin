@@ -15,6 +15,7 @@ import prometheusResource from '@perses-dev/prometheus-plugin/plugin.json';
 import panelsResource from '@perses-dev/panels-plugin/plugin.json';
 import { DashboardResource, GlobalDatasource, ProjectDatasource } from '@perses-dev/core';
 import { DatasourceApi } from '@perses-dev/dashboards';
+import { TextInput, Button } from '@patternfly/react-core';
 
 
 const fakeDatasource: GlobalDatasource = {
@@ -25,11 +26,31 @@ const fakeDatasource: GlobalDatasource = {
     plugin: {
       kind: 'PrometheusDatasource',
       spec: {
-        directUrl: "https://prometheus.demo.do.prometheus.io"
+        directUrl: "/api/proxy/plugin/tracing-console-plugin/backend/"
       },
     },
   },
 };
+
+// const fakeDatasource: GlobalDatasource = {
+//   kind: 'GlobalDatasource',
+//   metadata: { name: 'hello' },
+//   spec: {
+//     default: true,
+//     plugin: {
+//       kind: 'PrometheusDatasource',
+//       spec: {
+//         proxy: {
+//           kind: 'HTTPProxy', 
+//           spec: {
+//             url: 'https://prometheus.demo.do.prometheus.io'
+//           }
+//         }
+//       },
+//     },
+//   },
+// };
+
 
 class DatasourceApiImpl implements DatasourceApi {
   getDatasource(): Promise<ProjectDatasource | undefined> {
@@ -56,6 +77,11 @@ export const fakeDatasourceApi = new DatasourceApiImpl();
 export const fakeDashboard = { kind: 'Dashboard', metadata: {}, spec: {} } as DashboardResource;
 
 export default function EmbeddedPanel() {
+  // const [query, setQuery] = React.useState('up{job="prometheus"}');
+  const [value, setValue] = React.useState('');
+
+  const ref = React.useRef<HTMLInputElement>(null);
+
   const muiTheme = getTheme('light');
   const chartsTheme = generateChartsTheme(muiTheme, {});
   const pluginLoader = dynamicImportPluginLoader([
@@ -96,7 +122,7 @@ export default function EmbeddedPanel() {
                       definitions={[
                         {
                           kind: 'PrometheusTimeSeriesQuery',
-                          spec: { query: `up{job="prometheus"}` },
+                          spec: { query: 'up'},
                         },
                       ]}
                     >
@@ -112,6 +138,18 @@ export default function EmbeddedPanel() {
                           },
                         }}
                       />
+                      <TextInput
+                        ref={ref}
+                        // value={value}
+                        type="text"
+                        // onChange={(_event, value) => setValue(value.currentTarget.value)}
+                        aria-label="text input example"
+                      />
+                      <Button variant="primary" onClick={()=>{
+                        setValue(ref.current.value)
+                        console.log("ref.current.value: ", ref.current.value)
+                        console.log('value: ', value)
+                        }}>Submit</Button>
                     </DataQueriesProvider>
                   </DatasourceStoreProvider>
                 </TemplateVariableProvider>

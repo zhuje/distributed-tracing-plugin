@@ -11,6 +11,7 @@ import './example.css';
 import EmbeddedPanel from './EmbeddedPanel';
 
 export default function TracingPage() {
+
   return (
     <>
       <HelmetProvider>
@@ -24,6 +25,7 @@ export default function TracingPage() {
         </PageSection>
         <PageSection variant="light">
           <EmbeddedPanel/>
+
           <TextContent>
             <Text component="p">
               <span className="console-plugin-template__nice">Nice!</span> Your
