@@ -139,7 +139,7 @@ export default function EmbeddedPanel() {
                       definitions={[
                         {
                           kind: 'PrometheusTimeSeriesQuery',
-                          spec: { query: value},
+                          spec: { query: 'up'},
                         },
                       ]}
                     >
