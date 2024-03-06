@@ -18,7 +18,8 @@ import { DatasourceApi } from '@perses-dev/dashboards';
 import { TextInput, Button } from '@patternfly/react-core';
 
 
-const fakeDatasource: GlobalDatasource = {
+
+const fakeDatasource1: GlobalDatasource = {
   kind: 'GlobalDatasource',
   metadata: { name: 'hello' },
   spec: {
@@ -26,13 +27,27 @@ const fakeDatasource: GlobalDatasource = {
     plugin: {
       kind: 'PrometheusDatasource',
       spec: {
-        directUrl: "/api/proxy/plugin/tracing-console-plugin/backend/"
+        directUrl: "/api/proxy/plugin/distributed-tracing-plugin/backend"
       },
     },
   },
 };
 
-// const fakeDatasource: GlobalDatasource = {
+// const fakeDatasource2: GlobalDatasource = {
+//   kind: 'GlobalDatasource',
+//   metadata: { name: 'hello' },
+//   spec: {
+//     default: true,
+//     plugin: {
+//       kind: 'PrometheusDatasource',
+//       spec: {
+//         directUrl: "https://prometheus.demo.do.prometheus.io"
+//       },
+//     },
+//   },
+// };
+
+// const fakeDatasource3: GlobalDatasource = {
 //   kind: 'GlobalDatasource',
 //   metadata: { name: 'hello' },
 //   spec: {
@@ -50,6 +65,8 @@ const fakeDatasource: GlobalDatasource = {
 //     },
 //   },
 // };
+
+const fakeDatasource = fakeDatasource1
 
 
 class DatasourceApiImpl implements DatasourceApi {
@@ -78,7 +95,7 @@ export const fakeDashboard = { kind: 'Dashboard', metadata: {}, spec: {} } as Da
 
 export default function EmbeddedPanel() {
   // const [query, setQuery] = React.useState('up{job="prometheus"}');
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('up');
 
   const ref = React.useRef<HTMLInputElement>(null);
 
@@ -122,7 +139,7 @@ export default function EmbeddedPanel() {
                       definitions={[
                         {
                           kind: 'PrometheusTimeSeriesQuery',
-                          spec: { query: 'up'},
+                          spec: { query: value},
                         },
                       ]}
                     >
