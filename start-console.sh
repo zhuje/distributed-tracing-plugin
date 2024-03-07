@@ -36,6 +36,7 @@ if [[ $TEMPO_HOST == 0 ]]; then
     TEMPO_HOST="$INTERNAL_HOST:3200"
 fi
 
+
 CONSOLE_IMAGE=${CONSOLE_IMAGE:="quay.io/openshift/origin-console:latest"}
 CONSOLE_PORT=${CONSOLE_PORT:=9000}
 
@@ -72,7 +73,11 @@ function createEnvironment(){
     BRIDGE_USER_SETTINGS_LOCATION="localstorage"
     echo BRIDGE_USER_SETTINGS_LOCATION=$BRIDGE_USER_SETTINGS_LOCATION >> scripts/env.list
 
-    BRIDGE_PLUGIN_PROXY="{\"services\": [{\"consoleAPIPath\": \"/api/proxy/plugin/distributed-tracing-plugin/backend/\", \"authorize\": true, \"endpoint\": \"https://localhost:3200\"}]}"
+    BRIDGE_PLUGIN_PROXY="{\"services\": [{\"consoleAPIPath\": \"/api/proxy/plugin/distributed-tracing-plugin/backend/\", \"authorize\": true, \"endpoint\": \"${TEMPO_HOST}\"}]}"
+
+    # TEMPO_SANDBOX="https://play.grafana.org/api/datasources/proxy/uid/grafanacloud-traces"
+    # BRIDGE_PLUGIN_PROXY="{\"services\": [{\"consoleAPIPath\": \"/api/proxy/plugin/distributed-tracing-plugin/backend/\", \"authorize\": true, \"endpoint\": \"${TEMPO_SANDBOX}\"}]}"
+
     if [[ $USE_LOCAL_PROXY == 1 ]]; then
         echo "Using local proxy"
         echo BRIDGE_PLUGIN_PROXY=$BRIDGE_PLUGIN_PROXY >> scripts/env.list
