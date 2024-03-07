@@ -72,7 +72,7 @@ function createEnvironment(){
     BRIDGE_USER_SETTINGS_LOCATION="localstorage"
     echo BRIDGE_USER_SETTINGS_LOCATION=$BRIDGE_USER_SETTINGS_LOCATION >> scripts/env.list
 
-    BRIDGE_PLUGIN_PROXY="{\"services\": [{\"consoleAPIPath\": \"/api/proxy/plugin/distributed-tracing-plugin/backend/\", \"authorize\": true, \"endpoint\": \"https://prometheus.demo.do.prometheus.io\"}]}"
+    BRIDGE_PLUGIN_PROXY="{\"services\": [{\"consoleAPIPath\": \"/api/proxy/plugin/distributed-tracing-plugin/backend/\", \"authorize\": true, \"endpoint\": \"https://localhost:3200\"}]}"
     if [[ $USE_LOCAL_PROXY == 1 ]]; then
         echo "Using local proxy"
         echo BRIDGE_PLUGIN_PROXY=$BRIDGE_PLUGIN_PROXY >> scripts/env.list

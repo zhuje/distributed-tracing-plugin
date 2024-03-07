@@ -7,7 +7,7 @@ import {
   PluginRegistry,
   TimeRangeProvider
 } from "@perses-dev/plugin-system";
-import { TimeSeriesChart } from '@perses-dev/panels-plugin';
+import { ScatterChart } from '@perses-dev/panels-plugin';
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DatasourceStoreProvider, TemplateVariableProvider } from "@perses-dev/dashboards";
@@ -16,8 +16,7 @@ import panelsResource from '@perses-dev/panels-plugin/plugin.json';
 import { DashboardResource, GlobalDatasource, ProjectDatasource } from '@perses-dev/core';
 import { DatasourceApi } from '@perses-dev/dashboards';
 import { TextInput, Button } from '@patternfly/react-core';
-
-
+import tempoResource from '@perses-dev/tempo-plugin/plugin.json';
 
 const fakeDatasource1: GlobalDatasource = {
   kind: 'GlobalDatasource',
@@ -25,7 +24,7 @@ const fakeDatasource1: GlobalDatasource = {
   spec: {
     default: true,
     plugin: {
-      kind: 'PrometheusDatasource',
+      kind: 'TempoDatasource',
       spec: {
         directUrl: "/api/proxy/plugin/distributed-tracing-plugin/backend"
       },
@@ -33,41 +32,7 @@ const fakeDatasource1: GlobalDatasource = {
   },
 };
 
-// const fakeDatasource2: GlobalDatasource = {
-//   kind: 'GlobalDatasource',
-//   metadata: { name: 'hello' },
-//   spec: {
-//     default: true,
-//     plugin: {
-//       kind: 'PrometheusDatasource',
-//       spec: {
-//         directUrl: "https://prometheus.demo.do.prometheus.io"
-//       },
-//     },
-//   },
-// };
-
-// const fakeDatasource3: GlobalDatasource = {
-//   kind: 'GlobalDatasource',
-//   metadata: { name: 'hello' },
-//   spec: {
-//     default: true,
-//     plugin: {
-//       kind: 'PrometheusDatasource',
-//       spec: {
-//         proxy: {
-//           kind: 'HTTPProxy', 
-//           spec: {
-//             url: 'https://prometheus.demo.do.prometheus.io'
-//           }
-//         }
-//       },
-//     },
-//   },
-// };
-
 const fakeDatasource = fakeDatasource1
-
 
 class DatasourceApiImpl implements DatasourceApi {
   getDatasource(): Promise<ProjectDatasource | undefined> {
@@ -94,8 +59,7 @@ export const fakeDatasourceApi = new DatasourceApiImpl();
 export const fakeDashboard = { kind: 'Dashboard', metadata: {}, spec: {} } as DashboardResource;
 
 export default function EmbeddedPanel() {
-  // const [query, setQuery] = React.useState('up{job="prometheus"}');
-  const [value, setValue] = React.useState('up');
+  const [value, setValue] = React.useState('{}');
 
   const ref = React.useRef<HTMLInputElement>(null);
 
@@ -109,6 +73,10 @@ export default function EmbeddedPanel() {
     {
       resource: panelsResource as PluginModuleResource,
       importPlugin: () => import('@perses-dev/panels-plugin'),
+    },
+    {
+      resource: tempoResource as PluginModuleResource,
+      importPlugin: () => import('@perses-dev/tempo-plugin'),
     },
   ]);
 
@@ -129,6 +97,7 @@ export default function EmbeddedPanel() {
             defaultPluginKinds={{
               Panel: 'TimeSeriesChart',
               TimeSeriesQuery: 'PrometheusTimeSeriesQuery',
+              TraceQuery: 'TempoTraceQuery'
             }}
           >
             <QueryClientProvider client={queryClient}>
@@ -138,12 +107,12 @@ export default function EmbeddedPanel() {
                     <DataQueriesProvider
                       definitions={[
                         {
-                          kind: 'PrometheusTimeSeriesQuery',
-                          spec: { query: 'up'},
+                          kind: 'TempoTraceQuery',
+                          spec: { query: value},
                         },
                       ]}
                     >
-                      <TimeSeriesChart.PanelComponent
+                      <ScatterChart.PanelComponent
                         contentDimensions={{
                           width: 1200,
                           height: 400,
