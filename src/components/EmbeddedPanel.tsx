@@ -18,6 +18,9 @@ import { DatasourceApi } from '@perses-dev/dashboards';
 import { TextInput, Button } from '@patternfly/react-core';
 import tempoResource from '@perses-dev/tempo-plugin/plugin.json';
 
+// for testing only 
+import LoggingComponent from './LoggingComponent';
+
 const fakeDatasource1: GlobalDatasource = {
   kind: 'GlobalDatasource',
   metadata: { name: 'hello' },
@@ -31,6 +34,20 @@ const fakeDatasource1: GlobalDatasource = {
     },
   },
 };
+
+// const fakeDatasource1: GlobalDatasource = {
+//   kind: 'GlobalDatasource',
+//   metadata: { name: 'hello' },
+//   spec: {
+//     default: true,
+//     plugin: {
+//       kind: 'TempoDatasource',
+//       spec: {
+//         directUrl: "https://play.grafana.org/api/datasources/proxy/uid/grafanacloud-traces"
+//       },
+//     },
+//   },
+// };
 
 const fakeDatasource = fakeDatasource1
 
@@ -136,6 +153,9 @@ export default function EmbeddedPanel() {
                         console.log("ref.current.value: ", ref.current.value)
                         console.log('value: ', value)
                         }}>Submit</Button>
+                      
+                      <LoggingComponent />
+                      
                     </DataQueriesProvider>
                   </DatasourceStoreProvider>
                 </TemplateVariableProvider>
