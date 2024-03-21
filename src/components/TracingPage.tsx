@@ -9,6 +9,7 @@ import {
 } from '@patternfly/react-core';
 import './example.css';
 import EmbeddedPanel from './EmbeddedPanel';
+import { TableBasic } from './Table';
 
 export default function TracingPage() {
 
@@ -25,6 +26,7 @@ export default function TracingPage() {
         </PageSection>
         <PageSection variant="light">
           <EmbeddedPanel/>
+          <TableBasic />
 
           <TextContent>
             <Text component="p">

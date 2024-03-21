@@ -75,13 +75,13 @@
     "@emotion/styled": "^11.9.3",
     "@hookform/resolvers": "^3.2.0",
     "@mui/material": "^5.10.14",
+    "@patternfly/react-table": "^5.2.4",
     "@perses-dev/components": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
     "@perses-dev/dashboards": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
     "@perses-dev/panels-plugin": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
     "@perses-dev/plugin-system": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
     "@perses-dev/prometheus-plugin": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
     "@perses-dev/tempo-plugin": "0.0.0-snapshot-scatter-chart-embed-8efdfab",
-    "@tanstack/react-query": "^4.7.1",
-    "undefined": "0.1.0"
+    "@tanstack/react-query": "^4.7.1"
   }
 }

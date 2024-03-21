@@ -7,7 +7,7 @@ import {
   PluginRegistry,
   TimeRangeProvider
 } from "@perses-dev/plugin-system";
-import { ScatterChart } from '@perses-dev/panels-plugin';
+// import { ScatterChart } from '@perses-dev/panels-plugin';
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DatasourceStoreProvider, TemplateVariableProvider } from "@perses-dev/dashboards";
@@ -19,7 +19,7 @@ import { TextInput, Button } from '@patternfly/react-core';
 import tempoResource from '@perses-dev/tempo-plugin/plugin.json';
 
 // for testing only 
-import LoggingComponent from './LoggingComponent';
+import { ScatterChartPanel } from './MockScatterChartPanel';
 
 const fakeDatasource1: GlobalDatasource = {
   kind: 'GlobalDatasource',
@@ -108,30 +108,52 @@ export default function EmbeddedPanel() {
   return (
     <ThemeProvider theme={muiTheme}>
       <ChartsProvider chartsTheme={chartsTheme}>
-        <SnackbarProvider anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="default" content="">
+        <SnackbarProvider
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          variant="default"
+          content=""
+        >
           <PluginRegistry
             pluginLoader={pluginLoader}
             defaultPluginKinds={{
               Panel: 'TimeSeriesChart',
               TimeSeriesQuery: 'PrometheusTimeSeriesQuery',
-              TraceQuery: 'TempoTraceQuery'
+              TraceQuery: 'TempoTraceQuery',
             }}
           >
             <QueryClientProvider client={queryClient}>
-              <TimeRangeProvider refreshInterval="0s" timeRange={{ pastDuration: '30m' }}>
+              <TimeRangeProvider
+                refreshInterval="0s"
+                timeRange={{ pastDuration: '30m' }}
+              >
                 <TemplateVariableProvider>
-                  <DatasourceStoreProvider dashboardResource={fakeDashboard} datasourceApi={fakeDatasourceApi}>
+                  <DatasourceStoreProvider
+                    dashboardResource={fakeDashboard}
+                    datasourceApi={fakeDatasourceApi}
+                  >
                     <DataQueriesProvider
                       definitions={[
                         {
                           kind: 'TempoTraceQuery',
-                          spec: { query: value},
+                          spec: { query: value },
                         },
                       ]}
                     >
-                      <ScatterChart.PanelComponent
+                      {/* <ScatterChart.PanelComponent
                         contentDimensions={{
                           width: 1200,
+                          height: 400,
+                        }}
+                        spec={{
+                          legend: {
+                            position: 'bottom',
+                            size: 'medium',
+                          },
+                        }}
+                      /> */}
+                      <ScatterChartPanel
+                        contentDimensions={{
+                          width: 1000,
                           height: 400,
                         }}
                         spec={{
@@ -148,14 +170,14 @@ export default function EmbeddedPanel() {
                         // onChange={(_event, value) => setValue(value.currentTarget.value)}
                         aria-label="text input example"
                       />
-                      <Button variant="primary" onClick={()=>{
-                        setValue(ref.current.value)
-                        console.log("ref.current.value: ", ref.current.value)
-                        console.log('value: ', value)
-                        }}>Submit</Button>
-                      
-                      <LoggingComponent />
-                      
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setValue(ref.current.value);
+                        }}
+                      >
+                        Submit
+                      </Button>
                     </DataQueriesProvider>
                   </DatasourceStoreProvider>
                 </TemplateVariableProvider>
